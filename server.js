@@ -1,7 +1,19 @@
 import app from './src/app.js'
-const PORT = 3000 //porta
+import conexao from './infra/conexao.js'
 
-//Escultar a porta
-app.listen(PORT, ()=>{
+const PORT = 3000 //porta
+//Fazer a conexão
+conexao.connect((erro)=>{
+if(erro){
+    console.log('CONEXÃO FALHOU: ',erro)
+}else{
+    console.log('CONEXÃO ESTABELECIDADA')
+    //Escultar a porta
+    app.listen(PORT, ()=>{
     console.log(`SERVIDOR RODANDO NO ENDEREÇO http://localhost:${PORT}`)
 })
+}
+
+})
+
+
