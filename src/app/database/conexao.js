@@ -10,5 +10,21 @@ const conexao = mysql.createConnection({
 })
 
 conexao.connect()
+/**
+ * Executa o codigo sql com ou sem valores
+ * @param {string} sql instrução sql a ser executada
+ * @param {string=id / [selecao, id]} valores a serem passados ao sql
+ * @param {string} mensagemReject mensagem a ser exibida
+ * @returns objeto da Promise
+ */
+export const consulta = (sql, valores='',mensagemReject)=>{
+    return new Promise((resolv, reject)=>{
+        conexao.query(sql, valores,  (erro, resultado)=>{
+            if(erro) return reject(mensagemReject)
+            const row = JSON.parse(JSON.stringify(resultado))
+            return resolv(row)
+        })
+    })
+}
 
 export default conexao
