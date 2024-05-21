@@ -1,6 +1,5 @@
 //importar  o express
 import express from 'express'
-import conexao from './app/database/conexao.js'
 import SelecaoController from './app/controllers/SelecaoController.js'
 const app = express() //instancia
 
