@@ -6,23 +6,10 @@ class SelecaoController{
         res.json(row)
        
     }
-    show(req, res){
-        const id = req.params.id
-        const sql = "SELECT * FROM selecoes WHERE id=?;"
-        conexao.query(sql, id, (erro, retorno)=>{
-            const linha = retorno[0]
-            if(erro){
-                console.log(erro)
-                res.status(404).json({'erro':erro})
-            }else{
-                if(linha){
-                    res.status(200).json(linha)
-                }else{
-                    res.status(404).json({'vazio':'Sem dados para o Id informado'})
-                }
-               
-            }
-        })
+    async show(req, res){
+       const id = req.params.id
+       const row = await SelecaoRepository.findById(id)
+       res.json(row)
     }
     store(req, res){
         const selecao = req.body
